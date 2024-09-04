@@ -66,11 +66,12 @@ def process_audio(audio, api_key):
     #                 file_path="outputs/thanga-output.wav",
     #                 speaker="Kumar Dahl",
     #                 language="en")
-    tts.tts_to_file(text=response, file_path="outputs/updated-thanga-output.wav")
-    return transcription, response
+    tts.tts_to_file(text=response, file_path="outputs/thanga.wav")
+    return "outputs/thanga.wav"
+    #return transcription, response
 
 
-with gr.Blocks(theme=gr.themes.Default()) as demo:
+with gr.Blocks(theme=gr.themes.glass) as demo:
     gr.Markdown("Meet My AI Assistant.")
 
     api_key_input = gr.Textbox(type="password", label="Enter your Groq API Key")
@@ -78,9 +79,10 @@ with gr.Blocks(theme=gr.themes.Default()) as demo:
     with gr.Row():
         audio_input = gr.Audio(label="Speak!", type="numpy")
 
-    with gr.Row():
-        transcription_output = gr.Textbox(label="Transcription")
-        response_output = gr.Textbox(label="AI Assistant Response")
+    #with gr.Row():
+        #transcription_output = gr.Textbox(label="Transcription")
+        #response_output = gr.Audio(label="AI Assistant Response")
+
 
     submit_button = gr.Button("Process", variant="primary")
 
@@ -94,7 +96,10 @@ with gr.Blocks(theme=gr.themes.Default()) as demo:
     submit_button.click(
         process_audio,
         inputs=[audio_input, api_key_input],
-        outputs=[transcription_output, response_output]
+        outputs=[gr.Audio(label="Audio")]
+        #outputs=[transcription_output, response_output]
     )
-
+# demo = gr.Interface(fn=process_audio,
+#                     inputs=[audio_input, api_key_input],
+#                     outputs=[gr.Audio(label="Audio")])
 demo.launch()
