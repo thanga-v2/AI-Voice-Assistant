@@ -5,8 +5,7 @@ import numpy as np
 import soundfile as sf
 from TTS.api import TTS
 
-tts = TTS(model_name='tts_models/multilingual/multi-dataset/xtts_v2')
-
+tts = TTS(model_name="tts_models/en/ljspeech/fast_pitch")
 
 def transcribe_audio(audio, api_key):
     if audio is None:
@@ -63,10 +62,11 @@ def process_audio(audio, api_key):
     transcription = transcribe_audio(audio, api_key)
     response = generate_response(transcription, api_key)
     print("response to thanga -> \n",response)
-    tts.tts_to_file(text=response,
-                    file_path="outputs/thanga-output.wav",
-                    speaker="Kumar Dahl",
-                    language="en")
+    # tts.tts_to_file(text=response,
+    #                 file_path="outputs/thanga-output.wav",
+    #                 speaker="Kumar Dahl",
+    #                 language="en")
+    tts.tts_to_file(text=response, file_path="outputs/updated-thanga-output.wav")
     return transcription, response
 
 
