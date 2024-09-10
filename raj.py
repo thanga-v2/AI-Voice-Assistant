@@ -71,7 +71,7 @@ def process_audio(audio, api_key):
     #return transcription, response
 
 
-with gr.Blocks(theme=gr.themes.glass) as demo:
+with gr.Blocks(theme=gr.themes.monochrome) as demo:
     gr.Markdown("Meet My AI Assistant.")
 
     api_key_input = gr.Textbox(type="password", label="Enter your Groq API Key")
